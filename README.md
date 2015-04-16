@@ -1,2 +1,3 @@
 # macro_model
 macroeconomic model simulation
+Our project will be to set up and run a discrete time macroeconomic model. The project will incorporate the IS-LM model and current economic conditions. A function will be made to simulate different economic conditions, changes in interest rates, etc. and it should output expected output, government expenditures, tax rates, interest rates, etc. after a set period of time. Additionally, we hope to incorporate matplotlib to spit out a graph to reflect all of this information and how it changed over the course of our model’s runtime. Since macroeconomic models (including the IS-LM model) are commonly represented as matrices with linear values, we intend to import the scipy.linalg to solve the changes over time.
