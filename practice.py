@@ -1,3 +1,3 @@
 def print_a(a):
-	print 'This is a: ' + repr(a) + '.'
+	print 'a is: ' + repr(a) + '.'
 print_a(7)
