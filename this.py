@@ -11,7 +11,7 @@ T = .2 #Average Tax Rate
 pi = 3 #Average inflation rate (in percentage points)
 B = 15 #Investment Line y-intercept
 D = .5 #Investment Line slope
-M = 12 #Money Supply
+M = 12 #Money Supply in trillions
 k = .2
 h = .8
  
@@ -28,14 +28,13 @@ def LM(Y):
     r = i + pi #L(Y, i) is defined here as M = k*Y - h * i
     return r
  
-intercept_vector = np.array([(B + G)/D + pi,LM(0)])
-matrix = np.array([[(1-0)/(IS(1) - IS(0)), 1], [(LM(1) - LM(0))/(1-0), 1]])
-
-equilibrium = abs(np.linalg.solve(matrix, intercept_vector))
 
 
 
 def plot_IS_LM():
+	intercept_vector = np.array([(B + G)/D + pi,LM(0)])
+	matrix = np.array([[(1-0)/(IS(1) - IS(0)), 1], [(LM(1) - LM(0))/(1-0), 1]])
+	equilibrium = abs(np.linalg.solve(matrix, intercept_vector))
 	I_S = plt.plot([IS(pi), IS(30 + pi)], [pi + 0, pi + 30], label='IS')
 	L_M = plt.plot([30, 100], [LM(30), LM(100)], label='LM')
 	plt.legend([I_S, L_M])
@@ -43,15 +42,10 @@ def plot_IS_LM():
 	plt.ylabel('Nominal Interest Rate')
 	plt.xlabel('Output')
 	I_S = plt.axes()
-	I_S.arrow(equilibrium[0] - 20, equilibrium[1], 15, 0, head_width = 2, head_length = 2, fc='k', ec='k')
+	I_S.annotate('Equilibrium', xy=(equilibrium[0] - 2, equilibrium[1]), xytext=(equilibrium[0] - 30, equilibrium[1]),arrowprops=dict(facecolor='black', shrink=0.1),)
 	plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 
-	
-print LM(0)
-
-
-
-
-print equilibrium
+plot_IS_LM()
+M = 14
 plot_IS_LM()
 plt.show()
