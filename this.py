@@ -14,8 +14,11 @@ D = .5 #Investment Line slope
 M = 12 #Money Supply in trillions
 k = .2
 h = .8
- 
- 
+year = 0
+Time_frame = 5
+
+
+
 def IS(r):
     i = r - pi
     I = B - D * i #Investment increases as interest rate decreases
@@ -33,8 +36,8 @@ def LM(Y):
 
 def plot_IS_LM():
 	intercept_vector = np.array([(B + G)/D + pi,LM(0)])
-	matrix = np.array([[(1-0)/(IS(1) - IS(0)), 1], [(LM(1) - LM(0))/(1-0), 1]])
-	equilibrium = abs(np.linalg.solve(matrix, intercept_vector))
+	matrix = np.array([[-(1-0)/(IS(1) - IS(0)), 1], [-(LM(1) - LM(0))/(1-0), 1]])
+	equilibrium = np.linalg.solve(matrix, intercept_vector)
 	I_S = plt.plot([IS(pi), IS(30 + pi)], [pi + 0, pi + 30], label='IS')
 	L_M = plt.plot([30, 100], [LM(30), LM(100)], label='LM')
 	plt.legend([I_S, L_M])
@@ -42,10 +45,12 @@ def plot_IS_LM():
 	plt.ylabel('Nominal Interest Rate')
 	plt.xlabel('Output')
 	I_S = plt.axes()
-	I_S.annotate('Equilibrium', xy=(equilibrium[0] - 2, equilibrium[1]), xytext=(equilibrium[0] - 30, equilibrium[1]),arrowprops=dict(facecolor='black', shrink=0.1),)
+	I_S.annotate('Equilibrium year ' + repr(year), xy=(equilibrium[0] - 2, equilibrium[1]), xytext=(equilibrium[0] - 30, equilibrium[1]),arrowprops=dict(facecolor='black', shrink=0.1),)
 	plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+	
+while Time_frame != (year-1):
+	plot_IS_LM()
+	M = M + 2
+	year = year + 1
 
-plot_IS_LM()
-M = 14
-plot_IS_LM()
 plt.show()
