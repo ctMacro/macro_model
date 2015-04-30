@@ -56,7 +56,9 @@ def plot_IS_LM():
 	
 while Time_frame != (year-1):
 	plot_IS_LM()
-	M = M + 2
+	new_M = M + 2
+	percent_change = new_M/M
+	M = new_M
 	year = year + 1
 
 plt.grid()
